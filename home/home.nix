@@ -22,6 +22,7 @@
     ./apps/nvim.nix
     ./apps/yazi.nix
     ./apps/tmux.nix
+    ./apps/container.nix
     #./apps/ollama.nix
     ./apps/misc.nix
   ];
