@@ -2,9 +2,8 @@
   config,
   pkgs,
   ...
-}:
-{
-  home.packages = with pkgs; [ zoxide ];
+}: {
+  home.packages = with pkgs; [zoxide];
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
@@ -33,17 +32,19 @@
       '';
     };
     shellAliases = {
-      tc = "tmux new -s";
-      ta = "tmux a -t";
-      tls = "tmux ls";
-      tkill = "tmux kill-session -t";
+      snix = "srn nix";
+      sgit = "srn git";
+      archive = "srn archive";
+      music = "serein music";
+      tm = "tmux new-session -A";
       cd = "z";
+      cat = "bat";
+      rg = "grep";
       se = "sudo -E -s nvim";
-      ls = "ls -l";
+      ls = "lsd -l";
       nvidia-gpu = "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia";
     };
     interactiveShellInit = ''
-      source ~/.nix-profile/etc/profile.d/nix.fish
       fastfetch
       set username (whoami)
       echo "				Welcome back, $username!"

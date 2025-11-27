@@ -6,8 +6,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    serein-cli = {
-      url = "github:nixuris/serein-cli";
+    srn-coreutils = {
+      url = "github:infraflakes/srn-coreutils/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -15,18 +15,18 @@
     self,
     nixpkgs,
     home-manager,
-    serein-cli,
+    srn-coreutils,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
+    username = "infraflakes";
+    hostname = "serein";
   in {
-    # Formatter
-    formatter.${system} = pkgs.nixfmt-rfc-style;
     # Home Manager
-    homeConfigurations."nixuris@serein" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit inputs;};
+      extraSpecialArgs = {inherit username inputs;};
       modules = [./home/home.nix];
     };
     # Dev Shell
@@ -35,6 +35,7 @@
       go = import ./devshells/go.nix {inherit pkgs;};
       js = import ./devshells/js.nix {inherit pkgs;};
       py = import ./devshells/py.nix {inherit pkgs;};
+      c = import ./devshells/c.nix {inherit pkgs;};
     };
   };
 }

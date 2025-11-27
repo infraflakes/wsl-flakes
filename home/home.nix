@@ -2,17 +2,25 @@
   config,
   pkgs,
   inputs,
+  username,
   ...
-}:
-{
+}: {
   nixpkgs.config.allowUnfree = true;
   home = {
-    username = "nixuris";
-    homeDirectory = "/home/nixuris";
+    username = username;
+    homeDirectory = "/home/${username}";
     stateVersion = "25.11";
     packages = [
-      #inputs.serein-cli.packages.${pkgs.system}.stable
-      inputs.serein-cli.packages.${pkgs.system}.test
+      pkgs.htop
+      pkgs.home-manager
+      pkgs.ncdu
+      pkgs.bottom
+      pkgs.nmap
+      pkgs.lsd
+      pkgs.ripgrep
+      pkgs.bat
+      pkgs.jq
+      inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
   imports = [

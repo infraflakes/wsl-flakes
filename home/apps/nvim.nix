@@ -3,15 +3,15 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   home = {
     packages = with pkgs; [
       fzf
       ripgrep
       gcc
-      nixfmt
       gnumake
+      stylua
+      alejandra
     ];
     sessionVariables = {
       EDITOR = "nvim";
